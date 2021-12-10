@@ -8,41 +8,50 @@ import { HttpClient } from '@angular/common/http';
 export class PostService {
   postsChange = new EventEmitter<Post[]>();
   posts: Post[] = [];
-   constructor(private http: HttpClient) {
-   }
 
-   async getPosts() {
-     const response = await this.http.get<{[id: string]: Post}>('https://skosumbaeva2502-default-rtdb.firebaseio.com/posts.json').toPromise();
-     if (response === null) {
-       return [];
-     }
-     this.posts = Object.keys(response).map(id => {
-       const postData = response[id];
-       return  new Post(id, postData.title, postData.dateCreated, postData.description);
-     });
-     return this.posts;
-   }
+  constructor(private http: HttpClient) {
+  }
 
-   async getPost(id: string) {
-     await this.getPosts().then(posts => {
-       this.posts = posts;
-     });
-     return this.posts.find(post => post.id === id);
-   }
+  async getPosts() {
+    const response = await this.http.get<{ [id: string]: Post }>('https://skosumbaeva2502-default-rtdb.firebaseio.com/posts.json').toPromise();
+    if (response === null) {
+      return [];
+    }
+    this.posts = Object.keys(response).map(id => {
+      const postData = response[id];
+      return new Post(id, postData.title, postData.dateCreated, postData.description);
+    });
+    return this.posts;
+  }
 
-   async deletePost(id: string) {
-     await this.http.delete('https://skosumbaeva2502-default-rtdb.firebaseio.com/posts/' + id + '.json').toPromise();
-     await this.getPosts().then(posts => {
-       this.posts = posts;
-     });
-     this.postsChange.emit(this.posts);
-   }
+  async getPost(id: string) {
+    await this.getPosts().then(posts => {
+      this.posts = posts;
+    });
+    return this.posts.find(post => post.id === id);
+  }
 
-   async addPost(postData: object) {
-     await this.http.post('https://skosumbaeva2502-default-rtdb.firebaseio.com/posts.json', postData).toPromise();
-     await this.getPosts().then(posts => {
-       this.posts = posts;
-     });
-     this.postsChange.emit(this.posts);
-   }
+  async deletePost(id: string) {
+    await this.http.delete('https://skosumbaeva2502-default-rtdb.firebaseio.com/posts/' + id + '.json').toPromise();
+    await this.getPosts().then(posts => {
+      this.posts = posts;
+    });
+    this.postsChange.emit(this.posts);
+  }
+
+  async addPost(postData: object) {
+    await this.http.post('https://skosumbaeva2502-default-rtdb.firebaseio.com/posts.json', postData).toPromise();
+    await this.getPosts().then(posts => {
+      this.posts = posts;
+    });
+    this.postsChange.emit(this.posts);
+  }
+
+  async editPost(postData: object, id: string) {
+    await this.http.put('https://skosumbaeva2502-default-rtdb.firebaseio.com/posts/' + id + '.json', postData).toPromise();
+    await this.getPosts().then(posts => {
+      this.posts = posts;
+    });
+    this.postsChange.emit(this.posts);
+  }
 }

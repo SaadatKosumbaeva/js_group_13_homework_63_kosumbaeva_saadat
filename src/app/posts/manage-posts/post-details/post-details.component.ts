@@ -12,15 +12,16 @@ export class PostDetailsComponent implements OnInit {
   post: Post | undefined = undefined;
   postId = '';
 
-  constructor(private postService: PostService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private postService: PostService, private route: ActivatedRoute, private router: Router) {
+  }
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       this.postId = params['id'];
       this.postService.getPost(this.postId).then(post => {
         this.post = post;
-      })
-    })
+      });
+    });
   }
 
   deletePost() {
@@ -29,6 +30,14 @@ export class PostDetailsComponent implements OnInit {
       void this.router.navigate(['']);
     } else {
       void this.router.navigate(['posts/manage']);
+    }
+  }
+
+  editPost() {
+    if (this.router.routerState.snapshot.url === '/posts/' + 'manage/' + this.postId) {
+      void this.router.navigate(['posts/manage/' + this.postId + '/edit']);
+    } else {
+      void this.router.navigate(['posts/' + this.postId + '/edit']);
     }
   }
 }

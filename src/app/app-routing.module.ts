@@ -15,10 +15,12 @@ const routes: Routes = [
     path: 'posts/manage', component: ManagePostsComponent, children: [
       {path: '', component: EmptyPostComponent},
       {path: ':id', component: PostDetailsComponent},
+      {path: ':id/edit', component: NewPostComponent},
     ]
   },
   {path: 'posts/add', component: NewPostComponent},
   {path: 'posts/:id', component: PostDetailsComponent},
+  {path: 'posts/:id/edit', component: NewPostComponent},
   {path: 'about', component: AboutComponent},
   {path: 'contacts', component: ContactsComponent},
 ];
