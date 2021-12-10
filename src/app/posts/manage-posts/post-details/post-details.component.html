@@ -1,1 +1,9 @@
-<p>post-details works!</p>
+<div class="card" *ngIf="post">
+  <div class="card-body">
+    <h5 class="card-title">{{ post.title }}</h5>
+    <p class="card-text">{{ post.description }}</p>
+    <p class="card-text"><small class="text-muted">{{ post.dateCreated }}</small></p>
+    <button class="btn btn-secondary">Edit</button>&nbsp;
+    <button class="btn btn-danger">Delete</button>
+  </div>
+</div>

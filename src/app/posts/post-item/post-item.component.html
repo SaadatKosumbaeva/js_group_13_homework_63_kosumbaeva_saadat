@@ -1,1 +1,7 @@
-<p>post-item works!</p>
+<div class="card">
+  <div class="card-body">
+    <p class="text-muted mb-2">Created on {{ post.dateCreated }}</p>
+    <h5 class="card-title">{{ post.title }}</h5>
+    <a href="#" class="btn btn-primary" [routerLink]="['/posts', post.id]">Read more &gt;&gt;</a>
+  </div>
+</div>
