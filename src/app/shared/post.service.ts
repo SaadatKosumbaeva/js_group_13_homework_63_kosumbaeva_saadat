@@ -37,4 +37,12 @@ export class PostService {
      });
      this.postsChange.emit(this.posts);
    }
+
+   async addPost(postData: object) {
+     await this.http.post('https://skosumbaeva2502-default-rtdb.firebaseio.com/posts.json', postData).toPromise();
+     await this.getPosts().then(posts => {
+       this.posts = posts;
+     });
+     this.postsChange.emit(this.posts);
+   }
 }
