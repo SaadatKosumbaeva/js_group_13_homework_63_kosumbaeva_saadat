@@ -9,14 +9,19 @@ import { PostService } from '../shared/post.service';
 })
 export class PostsComponent implements OnInit {
   posts: Post[] = [];
+  loading = false;
+
   constructor(private postService: PostService) { }
 
   ngOnInit(): void {
     this.postService.getPosts().then(posts => {
+      this.loading = this.postService.loading;
       this.posts = posts;
+      console.log(posts);
     });
     this.postService.postsChange.subscribe((posts: Post[]) => {
       this.posts = posts;
     });
+    this.loading = this.postService.loading;
   }
 }

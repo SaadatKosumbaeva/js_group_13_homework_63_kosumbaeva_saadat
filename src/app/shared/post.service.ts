@@ -8,20 +8,22 @@ import { HttpClient } from '@angular/common/http';
 export class PostService {
   postsChange = new EventEmitter<Post[]>();
   posts: Post[] = [];
+  loading = false;
 
   constructor(private http: HttpClient) {
   }
 
   async getPosts() {
+    this.loading = true;
     const response = await this.http.get<{ [id: string]: Post }>('https://skosumbaeva2502-default-rtdb.firebaseio.com/posts.json').toPromise();
+    this.loading = false;
     if (response === null) {
       return [];
     }
-    this.posts = Object.keys(response).map(id => {
+    return this.posts = Object.keys(response).map(id => {
       const postData = response[id];
       return new Post(id, postData.title, postData.dateCreated, postData.description);
     });
-    return this.posts;
   }
 
   async getPost(id: string) {
