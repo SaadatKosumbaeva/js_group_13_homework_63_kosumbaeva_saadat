@@ -1,2 +1,7 @@
-<app-post-item *ngFor="let post of posts" [post]="post"></app-post-item>
+<ng-container *ngIf="posts.length > 0; else emptyPosts">
+  <app-post-item *ngFor="let post of posts" [post]="post"></app-post-item>
+</ng-container>
 
+<ng-template #emptyPosts>
+  <p class="alert alert-primary">Posts is empty!</p>
+</ng-template>

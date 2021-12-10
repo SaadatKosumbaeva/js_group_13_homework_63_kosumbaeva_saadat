@@ -13,6 +13,7 @@ import { ContactsComponent } from './contacts/contacts.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
+import { EmptyPostComponent } from './posts/manage-posts/empty-post.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { HttpClientModule } from '@angular/common/http';
     AboutComponent,
     ContactsComponent,
     ToolbarComponent,
-    HomeComponent
+    HomeComponent,
+    EmptyPostComponent,
   ],
   imports: [
     BrowserModule,

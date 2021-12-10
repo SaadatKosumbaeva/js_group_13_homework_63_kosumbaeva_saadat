@@ -1,1 +1,22 @@
-<p>manage-posts works!</p>
+<div class="row">
+  <div class="col">
+    <div *ngIf="posts.length > 0; else emptyPosts">
+      <a routerLink="{{ post.id }}" *ngFor="let post of posts">
+        <div class="card" *ngIf="post">
+          <div class="card-body">
+            <h5 class="card-title">{{ post.title }}</h5>
+            <p class="card-text">{{ post.description }}</p>
+            <p class="card-text"><small class="text-muted">{{ post.dateCreated }}</small></p>
+          </div>
+        </div>
+      </a>
+    </div>
+    <ng-template #emptyPosts>
+      <p class="alert alert-primary">Posts is empty!</p>
+    </ng-template>
+  </div>
+  <div class="col">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+

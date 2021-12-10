@@ -4,6 +4,7 @@
     <p class="card-text">{{ post.description }}</p>
     <p class="card-text"><small class="text-muted">{{ post.dateCreated }}</small></p>
     <button class="btn btn-secondary">Edit</button>&nbsp;
-    <button class="btn btn-danger">Delete</button>
+    <button class="btn btn-danger" (click)="deletePost()">Delete</button>
   </div>
 </div>
+

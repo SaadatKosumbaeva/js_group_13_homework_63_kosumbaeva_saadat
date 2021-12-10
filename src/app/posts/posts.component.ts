@@ -8,13 +8,15 @@ import { PostService } from '../shared/post.service';
   styleUrls: ['./posts.component.css']
 })
 export class PostsComponent implements OnInit {
-  posts!: Post[];
+  posts: Post[] = [];
   constructor(private postService: PostService) { }
 
   ngOnInit(): void {
     this.postService.getPosts().then(posts => {
       this.posts = posts;
-    })
+    });
+    this.postService.postsChange.subscribe((posts: Post[]) => {
+      this.posts = posts;
+    });
   }
-
 }
